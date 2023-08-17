@@ -1,4 +1,13 @@
-<?php require_once 'inc/header.php' ?>
+<?php require_once 'inc/header.php' ;
+?>
+<?php
+require_once 'inc/dbconn.php';
+
+if (isset($_SESSION['user_id']))
+{
+
+
+?>
 
     <!-- Page Content -->
     <div class="page-heading products-heading header-text">
@@ -19,14 +28,19 @@
   <div class="d-flex justify-content-center">
     <h3 class="my-5">add new Post</h3>
   </div>
-  <form method="POST" action="" enctype="multipart/form-data">
+<?php
+require_once 'inc/errors.php';
+
+?>
+  <form method="POST" action="handler/handleaddpost.php" enctype="multipart/form-data">
     <div class="mb-3">
+      <br>
         <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" name="title" value="">
+        <input type="text" class="form-control" id="title" name="title" value="<?php if (isset($_SESSION['title'])) echo $_SESSION['title']; unset($_SESSION['title']);?>">
     </div>
     <div class="mb-3">
         <label for="body" class="form-label">Body</label>
-        <textarea class="form-control" id="body" name="body" rows="5"></textarea>
+        <textarea class="form-control" id="body" name="body" rows="5" ><?php if (isset($_SESSION['body'])) echo $_SESSION['body'];unset($_SESSION['body']);?></textarea>
     </div>
     <div class="mb-3">
         <label for="body" class="form-label">image</label>
@@ -38,3 +52,5 @@
 </div>
 
     <?php require_once 'inc/footer.php' ?>
+<?php
+}else {header("location:login.php");}

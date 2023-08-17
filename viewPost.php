@@ -62,7 +62,7 @@ else
               <div class="d-flex justify-content-center">
                   <a href="editPost.php?id=<?= $post['id']?>" class="btn btn-success mr-3 "> edit post</a>
               
-                  <a href="deletePost.php?id=<?= $post['id']?>" class="btn btn-danger "> delete post</a>
+                  <a href="handler/handledeletepost.php?id=<?= $post['id']?>" class="btn btn-danger "> delete post</a>
               </div>
             </div>
           </div>

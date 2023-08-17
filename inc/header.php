@@ -1,5 +1,19 @@
+<?php
+require_once 'inc/dbconn.php';
+$lang=$_SESSION['lang'];
+
+if ($lang =="ar")
+{
+    require 'msg_ar.php';
+}
+elseif ($lang =="en")
+{
+    require 'msg_en.php';
+}
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= $lang?>" dir="<?= $msg['dir']?>">
 
   <head>
 
@@ -44,29 +58,52 @@
     <header class="padding-0">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.php"><h2> <em>Blog</em></h2></a>
+          <a class="navbar-brand" href="index.php"><h2> <em><?= $msg['blog'];?></em></h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="index.php">All Posts
+                <a class="nav-link" href="index.php"><?=  $msg['All Posts '];?>
                   <span class="sr-only">(current)</span>
                 </a>
               </li> 
               <li class="nav-item">
-                <a class="nav-link" href="addPost.php">Add New Post</a>
+                <a class="nav-link" href="addPost.php"><?=$msg['Add New Post '];?></a>
+                <?php
+                if ($lang =="ar")
+                {
+
+                
+                ?>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">English</a>
+                <a class="nav-link" href="inc/changelang.php?lang=en">English</a>
               </li>
+              <?php
+              }
+              else
+              {                       
+              ?>
               <li class="nav-item">
-                <a class="nav-link" href="#">العربية</a>
+                <a class="nav-link" href="inc/changelang.php?lang=ar">العربية</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Logout</a>
-              </li>
+
+              <?php
+              }
+                  require_once 'inc/dbconn.php';
+                  if (isset($_SESSION['user_id'])){
+                  ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="handler/handlelogout.php"><?= $msg['Logout'];?></a>
+                  </li>
+                  <?php }else{ ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="login.php"><?=$msg['Login'];?></a>
+                  </li>
+                  <?php } ?>
+
             </ul>
           </div>
         </div>
